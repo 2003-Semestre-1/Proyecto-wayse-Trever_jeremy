@@ -1,0 +1,14 @@
+{
+    "usuarios": [
+      {
+        "nombre": "Gnarty",
+        "contrasena": "delunoalocho",
+        "correo": "Gnartyoficial@gmail.com"
+      },
+      {
+        "nombre": "Jerry",
+        "contrasena": "delochoaluno",
+        "correo": "Jerry@gmail.com"
+      }
+    ]
+  }

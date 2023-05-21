@@ -15,9 +15,9 @@ def menu():
     etiqueta = Label(inicio, text="bienvenido al Mini Wase. ¿Desea ingresar?")
     etiqueta.place(x=2, y=550)
 
-    img = PhotoImage(file="Fotos\menu.jpg")
-    lbl_img = Label(inicio, image=img)
-    lbl_img.place(x=0, y=0)
+    #img = PhotoImage(file="Fotos\menu.jpg")
+    #lbl_img = Label(inicio, image=img)
+    #lbl_img.place(x=0, y=0)
     
     boton1 = Button(inicio, text="si", command=registro)
     boton1.place(x=240, y=550)
