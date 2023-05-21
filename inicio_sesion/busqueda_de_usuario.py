@@ -1,27 +1,22 @@
 import json
 
-def contador(usuarios):
+def analizar(nombre="",contrasena=""):
+
+    resultado = False
+    
+    with open("inicio_sesion\credenciales.json","r") as datos:
+        credenciales = json.load(datos)
     contando = True
     contador = 0
     while contando:
         try:
-            usuarios["usuarios"][contador]["nombre"]
+            if credenciales["usuarios"][contador]["nombre"] == nombre and credenciales["usuarios"][contador]["contrasena"] == contrasena:
+
+                resultado = True
+                
+            
             contador += 1
         except:
             contando = False
 
-    return contador        
-
-
-def analizar(nombre,contraseña):
-    
-    with open("inicio_sesion\credenciales.json","r") as datos:
-        credenciales = json.load(datos)
-
-    cantidad_usuarios = contador(credenciales)
-    
-
-    print(cantidad_usuarios)
-    print(credenciales["usuarios"][0]["nombre"])
-
-analizar("a","b")
+    return resultado   
