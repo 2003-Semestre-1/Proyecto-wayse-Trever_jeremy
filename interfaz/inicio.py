@@ -15,10 +15,6 @@ def primera_pantalla():
     def registro():
         print("Hacer código que pueda enviar a interfaz de registro")
 
-    # Crea una etiqueta que pregunta si desea ingresar
-    etiqueta = Label(inicio, text="Bienvenido al Mini Wase. ¿Desea ingresar?")
-    etiqueta.place(x=2, y=550)
-
     # Cargar la imagen y mostrarla en un widget Label
     ruta_imagen = "Fotos\menu.jpg"  # Asegúrate de proporcionar el nombre correcto y la extensión de la imagen
     imagen = Image.open(ruta_imagen)
@@ -27,12 +23,12 @@ def primera_pantalla():
     lbl_img = Label(inicio, image=img)
     lbl_img.place(x=0, y=0)
 
-    # Crear un botón para la opción "Sí" que llama a la función de registro
-    boton1 = Button(inicio, text="Sí", command=registro)
+    # Crear una funcion que redireccione al usuario a la siguiente ventana de regirtro de usuario
+    boton1 = Button(inicio, text="precione aqui si desea ingresar al Waze", command=registro)
     boton1.place(x=240, y=550)
 
-    # Crear un botón para la opción "No" que llama a la función de salida
-    boton2 = Button(inicio, text="No", command=salida)
+    # Crear una funcion que cierre el programa
+    boton2 = Button(inicio, text="Precione aqui si desea cerrar el Waze", command=salida)
     boton2.place(x=270, y=550)
 
     inicio.mainloop()   
