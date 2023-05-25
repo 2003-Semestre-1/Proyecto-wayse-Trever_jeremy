@@ -14,7 +14,7 @@ DOBLE_SENTIDO = "ND"
 #codigo
 matriz = []
 
-with open("matriz\Rutabase.csv", 'r') as archivo_csv:
+with open("matriz\Ruta2.csv", 'r') as archivo_csv:
     lector_csv = csv.reader(archivo_csv, delimiter=';')
     print(lector_csv)
     for fila in lector_csv:
@@ -23,4 +23,4 @@ with open("matriz\Rutabase.csv", 'r') as archivo_csv:
 # Imprimir la matriz
 for fila in matriz:
     print(fila)
-print(matriz)
+#print(matriz)
