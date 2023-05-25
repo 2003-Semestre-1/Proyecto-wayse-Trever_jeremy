@@ -19,4 +19,4 @@ def analizar(nombre="",contrasena=""):
         except:
             contando = False
 
-    return resultado   
+    return resultado

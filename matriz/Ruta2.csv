@@ -3,8 +3,16 @@ ND,0,N,0,N,0,N,0,0,ND
 ND,0,N,0,N,0,N,R,R,ND
 ND,L,L,L,C,0,N,0,0,ND
 ND,0,S,0,N,L,C,L,L,ND
+<<<<<<< Updated upstream
 C,ND,ND,ND,C,0,N,0,0,ND
 ND,0,0,C,ND,ND,C,R,R,C
 ND,0,0,ND,0,0,N,0,0,ND
 ND,0,0,ND,0,0,N,0,0,C
 C,ND,ND,ND,ND,ND,C,ND,ND,ND
+=======
+    [C , ND, ND, ND,  C,  0,  N,  0,  0, ND],
+    [ND, 0 ,  0,  C, ND, ND,  C,  R,  R, C ],
+    [ND, 0 ,  0, ND,  0,  0,  N,  0,  0, ND],
+    [ND, 0 ,  0, ND,  0,  0,  N,  0,  0, C ],
+    [C , ND, ND, ND, ND, ND,  C, ND, ND, ND]
+>>>>>>> Stashed changes
