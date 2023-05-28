@@ -32,12 +32,18 @@ def sacarmatriz(nombre):
             matriz.append(fila)
 
     # Imprimir la matriz
-    #for fila in matriz:
-        #print(fila)
-        
+    for fila in matriz:
+        print(fila)
+    print("--------")
+    print(matriz)
     return matriz
 
+sacarmatriz("todoceros")
 #analizar la ruta de la matriz
+
+def listaconcoords(nombre):
+    print("a")
+
 def analizaralrededor(inicio,salida,nombre):
     Y = inicio[0]
     Z = inicio[1]
@@ -72,4 +78,4 @@ def analizaralrededor(inicio,salida,nombre):
     print(analizados)
     print(ruta_temportal)
         
-analizaralrededor([0,0],[0,0],"base")
+#analizaralrededor([0,0],[0,0],"base")
