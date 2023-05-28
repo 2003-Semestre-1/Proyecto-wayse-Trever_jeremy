@@ -70,7 +70,7 @@ def primera_pantalla():
 # Función para analizar las credenciales y validar el inicio de sesión
 def analizar(nombre="", contrasena=""):
     resultado = False
-    with open("credenciales.json", "r") as datos:
+    with open("inicio_sesion\credenciales.json", "r") as datos:
         credenciales = json.load(datos)
     contando = True
     contador = 0
