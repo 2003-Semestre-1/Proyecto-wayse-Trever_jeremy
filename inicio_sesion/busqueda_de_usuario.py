@@ -13,8 +13,6 @@ def analizar(nombre="",contrasena=""):
             if credenciales["usuarios"][contador]["nombre"] == nombre and credenciales["usuarios"][contador]["contrasena"] == contrasena:
 
                 resultado = True
-                
-            
             contador += 1
         except:
             contando = False
