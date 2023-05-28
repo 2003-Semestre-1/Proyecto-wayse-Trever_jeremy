@@ -29,7 +29,7 @@ def primera_pantalla():
             ventana_mensaje.geometry("400x100")
             label_mensaje = Label(ventana_mensaje, text="El usuario o contraseña son incorrectos", background="yellow")
             label_mensaje.place(x=150, y=30)
-            ruta_imagen = "fotos/foto2.jpg"
+            ruta_imagen = "Fotos/foto2.jpg"
             imagen = Image.open(ruta_imagen)
             imagen = imagen.resize((60, 60))  # Ajusta el tamaño de la imagen según tus necesidades
             img = ImageTk.PhotoImage(imagen)
@@ -40,7 +40,7 @@ def primera_pantalla():
             ventana_mensaje.mainloop()
 
     # Cargar la imagen y mostrarla en un widget Label
-    ruta_imagen = "fotos/foto1.jpg"
+    ruta_imagen = "Fotos/menu.jpg"
     imagen = Image.open(ruta_imagen)
     imagen = imagen.resize((600, 600))  # Ajusta el tamaño de la imagen
     img = ImageTk.PhotoImage(imagen)
@@ -90,7 +90,7 @@ def pantalla_menú():
     ventana_secundaria.geometry("600x600")
 
     # Cargar la imagen y mostrarla en un widget Label
-    ruta_imagen = "fotos/foto3.jpg"  # Asegúrate de proporcionar la ruta correcta y el nombre de la imagen
+    ruta_imagen = "Fotos/foto3.jpg"  # Asegúrate de proporcionar la ruta correcta y el nombre de la imagen
     imagen = Image.open(ruta_imagen)
     imagen = imagen.resize((600, 600))  # Ajusta el tamaño de la imagen según tus necesidades
     img = ImageTk.PhotoImage(imagen)
