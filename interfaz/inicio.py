@@ -29,7 +29,7 @@ def primera_pantalla():
             ventana_mensaje.geometry("400x100")
             label_mensaje = Label(ventana_mensaje, text="El usuario o contraseña son incorrectos", background="yellow")
             label_mensaje.place(x=150, y=30)
-            ruta_imagen = "Fotos/foto2.jpg"
+            ruta_imagen = "fotos/foto2.jpg"
             imagen = Image.open(ruta_imagen)
             imagen = imagen.resize((60, 60))  # Ajusta el tamaño de la imagen según tus necesidades
             img = ImageTk.PhotoImage(imagen)
@@ -40,7 +40,7 @@ def primera_pantalla():
             ventana_mensaje.mainloop()
 
     # Cargar la imagen y mostrarla en un widget Label
-    ruta_imagen = "Fotos/menu.jpg"
+    ruta_imagen = "fotos/foto1.jpg"
     imagen = Image.open(ruta_imagen)
     imagen = imagen.resize((600, 600))  # Ajusta el tamaño de la imagen
     img = ImageTk.PhotoImage(imagen)
@@ -70,7 +70,7 @@ def primera_pantalla():
 # Función para analizar las credenciales y validar el inicio de sesión
 def analizar(nombre="", contrasena=""):
     resultado = False
-    with open("inicio_sesion\credenciales.json", "r") as datos:
+    with open("credenciales.json", "r") as datos:
         credenciales = json.load(datos)
     contando = True
     contador = 0
@@ -90,14 +90,14 @@ def pantalla_menú():
     ventana_secundaria.geometry("600x600")
 
     # Cargar la imagen y mostrarla en un widget Label
-    ruta_imagen = "Fotos/foto3.jpg"  # Asegúrate de proporcionar la ruta correcta y el nombre de la imagen
+    ruta_imagen = "fotos/foto3.jpg"  # Asegúrate de proporcionar la ruta correcta y el nombre de la imagen
     imagen = Image.open(ruta_imagen)
     imagen = imagen.resize((600, 600))  # Ajusta el tamaño de la imagen según tus necesidades
     img = ImageTk.PhotoImage(imagen)
     lbl_img = Label(ventana_secundaria, image=img)
     lbl_img.place(x=0, y=0)
    # Botón para cargar mapa
-    boton_crear = Button(ventana_secundaria, text="Cargar Mapa", bg="red")
+    boton_crear = Button(ventana_secundaria, text="Cargar Mapa", bg="red",command=cargar_mapa)
     boton_crear.place(x=98, y=240)
     # Botón para seleccionar destino
     boton_selec = Button(ventana_secundaria, text="Seleccionar destino", bg="red")
@@ -125,7 +125,76 @@ def registro():
     ventana_registro = tk.Toplevel()
     ventana_registro.title("Registro de usuario")
     ventana_registro.geometry("400x300")
-    # Agrega aquí los elementos de la ventana de registro
 
-# Ejecutar la primera pantalla
-primera_pantalla() 
+#funcion de crear mapa
+import tkinter as tk
+from tkinter import *
+from PIL import ImageTk, Image
+import csv
+
+# Función para cargar el mapa con los valores de la matriz
+#_____________________________________________________
+def cargar_mapa():
+    ventana_mapa = tk.Toplevel()
+    ventana_mapa.title("Mapa")
+    ventana_mapa.geometry("600x600")
+
+    matriz_botones = []
+
+    with open("Base.csv", "r") as archivo_csv:
+        csv_reader = csv.reader(archivo_csv)
+        
+        for fila in csv_reader:
+            fila_botones = []
+            
+            for valor in fila:
+                primer_digito = valor[0]
+                ruta_imagen = ""
+
+                if primer_digito == "S" or primer_digito == "N":
+                    ruta_imagen = "fotos/SN.jpg"
+                elif primer_digito == "C":
+                    ruta_imagen = "fotos/C.jpg"
+                elif primer_digito == "L" or primer_digito == "R":
+                    ruta_imagen = "fotos/LR.jpg"
+                elif primer_digito == "NDH":
+                    ruta_imagen = "fotos/NDH.jpg"
+                elif primer_digito == "NDV":
+                    ruta_imagen = "fotos/NDV.jpg"
+
+                if ruta_imagen != "":
+                    imagen = Image.open(ruta_imagen)
+                    imagen = imagen.resize((60, 60))  # Ajusta el tamaño de la imagen según tus necesidades
+                    img = ImageTk.PhotoImage(imagen)
+                    boton = Button(ventana_mapa, image=img)
+                    boton.image = img
+                else:
+                    boton = Button(ventana_mapa, text=valor)
+
+                boton.grid(row=Len(matriz_botones), column=Len(fila_botones))
+                fila_botones = append(fila_botones, boton)
+            
+            matriz_botones = append(matriz_botones, fila_botones)
+#_____________________________________________________
+#codigos de apollo para codigos
+"""
+nombre: Len
+entrada: lista
+salida: contador de indises que existen en una lista
+"""
+def Len(objeto):
+    contador = 0
+    for elemento in objeto:
+        contador += 1
+    return contador
+"""
+nombre: append
+entrada: lista y elemento
+salida: agregar un elemento a una lista
+"""
+def append(lista, elemento):
+    lista += [elemento]
+    return lista
+
+# Llama a la función "primera_pantalla()" para iniciar la aplicación
+primera_pantalla()
