@@ -49,12 +49,15 @@ def analizaralrededor(inicio, salida, nombre):
     ruta_temporal = [[matriz[Y][Z], Y, Z]]
     ruta = alrededores(matriz, salida, ruta_temporal)
 
-    # Reemplazar ruta con asteriscos en la matriz
+    # Crear una copia de la matriz
+    matriz_modificada = [fila.copy() for fila in matriz]
+
+    # Reemplazar ruta con asteriscos en la matriz modificada
     for paso in ruta:
-        matriz[paso[1]][paso[2]] = "*"
+        matriz_modificada[paso[1]][paso[2]] = "*"
 
     # Guardar la matriz modificada en un nuevo archivo CSV
-    guardar_matriz(nombre + "_modificado", matriz)
+    guardar_matriz(nombre + "_modificado", matriz_modificada)
 
     return ruta
 
