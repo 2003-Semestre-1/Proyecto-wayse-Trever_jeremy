@@ -137,7 +137,7 @@ import csv
 def cargar_mapa():
     ventana_mapa = tk.Toplevel()
     ventana_mapa.title("Mapa")
-    ventana_mapa.geometry("600x600")
+    ventana_mapa.geometry("700x700")
 
     matriz_botones = []
 
@@ -148,33 +148,49 @@ def cargar_mapa():
             fila_botones = []
             
             for valor in fila:
-                primer_digito = valor[0]
+                digito = valor[0]
                 ruta_imagen = ""
 
-                if primer_digito == "S" or primer_digito == "N":
-                    ruta_imagen = "fotos/SN.jpg"
-                elif primer_digito == "C":
-                    ruta_imagen = "fotos/C.jpg"
-                elif primer_digito == "L" or primer_digito == "R":
-                    ruta_imagen = "fotos/LR.jpg"
-                elif primer_digito == "NDH":
-                    ruta_imagen = "fotos/NDH.jpg"
-                elif primer_digito == "NDV":
-                    ruta_imagen = "fotos/NDV.jpg"
-
+                if digito == "A":
+                    ruta_imagen = "fotos/A.png"
+                elif digito == "B":
+                    ruta_imagen = "fotos/B.png"
+                elif digito == "C":
+                    ruta_imagen = "fotos/C.png"
+                elif digito == "D":
+                    ruta_imagen = "fotos/DN.png"
+                elif digito == "E":
+                    ruta_imagen = "fotos/E.png"
+                elif digito == "H":
+                    ruta_imagen = "fotos/H.png"
+                elif digito == "L" or digito == "R":
+                    ruta_imagen = "fotos/LR.png"
+                elif digito == "N" or digito == "S":
+                    ruta_imagen = "fotos/NS.png"
+                elif digito == "P":
+                    ruta_imagen = "fotos/P.png"
+                elif digito == "T":
+                    ruta_imagen = "fotos/T.png"
+                elif digito == "V":
+                    ruta_imagen = "fotos/V.png"
+                elif digito == "Z":
+                    ruta_imagen = "fotos/Z.png"
+                elif digito == "J":
+                    ruta_imagen = "fotos/J.png"
+                
                 if ruta_imagen != "":
                     imagen = Image.open(ruta_imagen)
-                    imagen = imagen.resize((60, 60))  # Ajusta el tamaño de la imagen según tus necesidades
+                    imagen = imagen.resize((60, 60))
                     img = ImageTk.PhotoImage(imagen)
                     boton = Button(ventana_mapa, image=img)
                     boton.image = img
                 else:
                     boton = Button(ventana_mapa, text=valor)
-
                 boton.grid(row=Len(matriz_botones), column=Len(fila_botones))
-                fila_botones = append(fila_botones, boton)
-            
-            matriz_botones = append(matriz_botones, fila_botones)
+                fila_botones(append(boton))
+            matriz_botones(append(fila_botones))
+
+
 #_____________________________________________________
 #codigos de apollo para codigos
 """
