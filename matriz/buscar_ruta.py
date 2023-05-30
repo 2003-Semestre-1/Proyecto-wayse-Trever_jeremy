@@ -1,108 +1,95 @@
 import csv
 
 
-# constantes
+# Constantes
 LEER = "r"
-A_NORTE_SUR = "S"
-A_SUR_NORTE = "N"
 C_LEFT = "L"
-C_RIGTH = "R"
+C_RIGHT = "R"
 INTERSECCION = "C"
-DOBLE_SENTIDO = "ND"
+DOBLE_SENTIDO_VERTICAL = "DN"
+DOBLE_SENTIDO_HORIZONTAL = "DH"
+NORTE = "N"
+SUR = "S"
 EDIFICIO = "0"
 
-
-#variables
-
+# Variables
 rutas_guardadas = []
 
-
-#codigo
+# Código
 def sacarmatriz(nombre):
     CSV = ".csv"
     RUTAS = 'rutas\ '
     
     RUTAENTERA = RUTAS[:-1] + nombre + CSV
     matriz = []
-    #print(RUTAENTERA)
+    
     with open(RUTAENTERA, LEER) as archivo_csv:
         lector_csv = csv.reader(archivo_csv, delimiter=',')
-        #print(lector_csv)
+        
         for fila in lector_csv:
             matriz.append(fila)
 
-    # Imprimir la matriz
-    #for fila in matriz:
-        #print(fila)
-    #print("--------")
-    #print(matriz)
-    #print("--------")
     return matriz
-
-
-#analizar la ruta de la matriz
 
 def listaconcoords(nombre):
     print("a")
 
-def analizaralrededor(inicio,salida,nombre):
+def analizaralrededor(inicio, salida, nombre):
     Y = inicio[0]
     Z = inicio[1]
     matriz = sacarmatriz(nombre)
-    ruta_temporal = []
-    ruta_temporal = ruta_temporal + [[matriz[Y][Z],Y , Z]]
-    ruta = alrededores(matriz,salida,ruta_temporal)
-    print(ruta)
-    #print(ruta_temportal)
+    ruta_temporal = [[matriz[Y][Z], Y, Z]]
+    ruta = alrededores(matriz, salida, ruta_temporal)
+    return ruta
 
-def alrededores(matriz,salida,ruta_temporal):   
-        #print(ruta_temporal)
-        analizados = []
-        error = 0
-        Y = ruta_temporal[-1][1]
-        Z = ruta_temporal[-1][2]
-        #columna abajo
-        try:
-            analizados = analizados + [[matriz[Y+1][Z],Y+1,Z]]
-        except:
-            error +1    
-        #columna arriba
-        if Y-1 > 0:
-            analizados = analizados + [[matriz[Y-1][Z],Y-1,Z]]
-            
-        #fila derecha
-        try:
-            analizados = analizados + [[matriz[Y][Z+1],Y,Z+1]]
-        except:
-            error +1
+def alrededores(matriz, salida, ruta_temporal):   
+    analizados = []
+    Y = ruta_temporal[-1][1]
+    Z = ruta_temporal[-1][2]
+    
+    # Columna abajo
+    try:
+        valor = matriz[Y+1][Z]
+        if valor not in ["T", "P", "E", "H", "Z", "J", EDIFICIO]:
+            analizados.append([valor, Y+1, Z])
+    except:
+        pass
+    
+    # Columna arriba
+    if Y-1 > 0:
+        valor = matriz[Y-1][Z]
+        if valor not in ["T", "P", "E", "H", "Z", "J", EDIFICIO]:
+            analizados.append([valor, Y-1, Z])
         
-        #fila izquierda
-        if Z-1 > 0:
-            analizados = analizados + [[matriz[Y][Z-1],Y,Z-1]]
+    # Fila derecha
+    try:
+        valor = matriz[Y][Z+1]
+        if valor not in ["T", "P", "E", "H", "Z", "J", EDIFICIO]:
+            analizados.append([valor, Y, Z+1])
+    except:
+        pass
+    
+    # Fila izquierda
+    if Z-1 > 0:
+        valor = matriz[Y][Z-1]
+        if valor not in ["T", "P", "E", "H", "Z", "J", EDIFICIO]:
+            analizados.append([valor, Y, Z-1])
+    
+    for elemento in analizados:
+        if elemento not in ruta_temporal:
+            ruta_temporal.append(elemento)
             
-        print("Analizados")
-        print(analizados) 
-        for elementos in analizados:
-               
-            ruta_temporal = ruta_temporal + [elementos]
-            print("Ruta_temporal")
-            print(ruta_temporal)
-            print("largo de ruta")
-            print(len(ruta_temporal))
-            if len(ruta_temporal) > 1:
-                if ruta_temporal[-1][1] == salida[0] and ruta_temporal[-1][2] == salida[1]:
-                    return ruta_temporal
-                
-            ruta_temporal = alrededores(matriz,salida,ruta_temporal)
-                
+            if elemento[1] == salida[0] and elemento[2] == salida[1]:
+                return ruta_temporal
+            
+            ruta_temporal = alrededores(matriz, salida, ruta_temporal)
+            
             if ruta_temporal[-1][1] == salida[0] and ruta_temporal[-1][2] == salida[1]:
                 return ruta_temporal
             else:
                 ruta_temporal = ruta_temporal[:-1]
         
-        return ruta_temporal
-            
-    
-        
+    return ruta_temporal
 
-analizaralrededor([0,0],[4,5],"base")
+ruta = analizaralrededor([0, 0], [4, 5], "base")
+print(ruta)

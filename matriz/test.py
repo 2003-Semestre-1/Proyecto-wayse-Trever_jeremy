@@ -1,77 +1,60 @@
-import csv
+def analizaralrededor(inicio, salida, nombre):
+    Y = inicio[0]
+    Z = inicio[1]
+    matriz = sacarmatriz(nombre)
+    rutas_posibles = []
+    ruta_temporal = []
+    ruta_temporal = append(ruta_temporal, [matriz[Y][Z], Y, Z])
+    visitados = []
+    visitados.append((Y, Z))
+    alrededores(matriz, salida, ruta_temporal, visitados, rutas_posibles)
 
-# Constantes
-LEER = "r"
-A_NORTE_SUR = "S"
-A_SUR_NORTE = "N"
-C_LEFT = "L"
-C_RIGTH = "R"
-INTERSECCION = "C"
-DOBLE_SENTIDO = "ND"
-EDIFICIO = "0"
-
-
-def sacar_matriz(nombre):
-    CSV = ".csv"
-    RUTAS = 'rutas/'
-    RUTA_ENTERA = RUTAS + nombre + CSV
-    matriz = []
-    with open(RUTA_ENTERA, LEER) as archivo_csv:
-        lector_csv = csv.reader(archivo_csv, delimiter=',')
-        for fila in lector_csv:
-            matriz.append(fila)
-    return matriz
+    return rutas_posibles
 
 
-def encontrar_ruta(matriz, salida):
-    visitados = set()
-    pila = [[salida[0], salida[1], [(salida[0], salida[1])]]]
+def alrededores(matriz, salida, ruta_temporal, visitados, rutas_posibles):
+    analizados = []
+    error = 0
+    Y = ruta_temporal[-1][1]
+    Z = ruta_temporal[-1][2]
 
-    while pila:
-        y, x, ruta = pila.pop()
+    # Columna abajo
+    try:
+        analizados = append(analizados, [matriz[Y + 1][Z], Y + 1, Z])
+    except:
+        error += 1
 
-        if (y, x) == (0, 0):
-            return ruta[::-1]  # Invertir la ruta encontrada
+    # Columna arriba
+    if Y - 1 >= 0:
+        analizados = append(analizados, [matriz[Y - 1][Z], Y - 1, Z])
 
-        if (y, x) in visitados:
-            continue
+    # Fila derecha
+    try:
+        analizados = append(analizados, [matriz[Y][Z + 1], Y, Z + 1])
+    except:
+        error += 1
 
-        visitados.add((y, x))
+    # Fila izquierda
+    if Z - 1 >= 0:
+        analizados = append(analizados, [matriz[Y][Z - 1], Y, Z - 1])
 
-        # Mover hacia el norte
-        if y - 1 >= 0 and matriz[y - 1][x] != EDIFICIO:
-            pila.append([y - 1, x, ruta + [(y - 1, x)]])
+    for elementos in analizados:
+        coord = (elementos[1], elementos[2])
+        if coord not in visitados and matriz[coord[0]][coord[1]] not in EDIFICIO:
+            ruta_temporal = append(ruta_temporal, elementos)
+            visitados.append(coord)
 
-        # Mover hacia el sur
-        if y + 1 < len(matriz) and matriz[y + 1][x] != EDIFICIO:
-            pila.append([y + 1, x, ruta + [(y + 1, x)]])
+            if Len(ruta_temporal) > 1:
+                if ruta_temporal[-1][1] == salida[0] and ruta_temporal[-1][2] == salida[1]:
+                    rutas_posibles.append(ruta_temporal[:])
 
-        # Mover hacia el este
-        if x + 1 < len(matriz[y]) and matriz[y][x + 1] != EDIFICIO:
-            pila.append([y, x + 1, ruta + [(y, x + 1)]])
+            alrededores(matriz, salida, ruta_temporal, visitados, rutas_posibles)
 
-        # Mover hacia el oeste
-        if x - 1 >= 0 and matriz[y][x - 1] != EDIFICIO:
-            pila.append([y, x - 1, ruta + [(y, x - 1)]])
+            if ruta_temporal[-1][1] == salida[0] and ruta_temporal[-1][2] == salida[1]:
+                rutas_posibles.append(ruta_temporal[:])
+            else:
+                ruta_temporal = ruta_temporal[:-1]
 
-    return None  # No se encontró una ruta
+    return rutas_posibles
 
-
-def buscar_ruta(inicio, salida, nombre_archivo):
-    matriz = sacar_matriz(nombre_archivo)
-    ruta = encontrar_ruta(matriz, salida)
-
-    if ruta:
-        print("Ruta encontrada:")
-        for paso in ruta:
-            print(paso)
-    else:
-        print("No se encontró una ruta válida.")
-
-
-# Ejemplo de uso
-inicio = (0, 0)
-salida = (4, 4)
-nombre_archivo = "base"
-
-buscar_ruta(inicio, salida, nombre_archivo)
+rutas = analizaralrededor([0, 0], [4, 5], "base")
